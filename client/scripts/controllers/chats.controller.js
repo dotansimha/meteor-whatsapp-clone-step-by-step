@@ -9,6 +9,6 @@ function ChatsCtrl ($scope) {
   ////////////
 
   function remove (chat) {
-    $scope.chats.splice($scope.chats.indexOf(chat), 1);
+    $scope.chats.remove(chat);
   }
 }

@@ -26,6 +26,21 @@ function config($stateProvider, $urlRouterProvider) {
           controller: 'ChatDetailCtrl'
         }
       }
+    })
+    .state('login', {
+      url: '/login',
+      templateUrl: 'client/templates/login.html',
+      controller: 'LoginCtrl'
+    })
+    .state('confirmation', {
+      url: '/confirmation/:phone',
+      templateUrl: 'client/templates/confirmation.html',
+      controller: 'ConfirmationCtrl'
+    })
+    .state('profile', {
+      url: '/profile',
+      templateUrl: 'client/templates/profile.html',
+      controller: 'ProfileCtrl'
     });
 
   $urlRouterProvider.otherwise('tab/chats');

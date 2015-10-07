@@ -2,7 +2,7 @@ angular
   .module('Whatsapp')
   .controller('ChatDetailCtrl', ChatDetailCtrl);
 
-function ChatDetailCtrl ($scope, $stateParams, $ionicScrollDelegate, $timeout) {
+function ChatDetailCtrl ($scope, $stateParams, $ionicScrollDelegate, $timeout, $meteor) {
   var chatId = $stateParams.chatId;
   var isIOS = ionic.Platform.isWebView() && ionic.Platform.isIOS();
   $scope.chat = $scope.$meteorObject(Chats, chatId, false);
@@ -20,7 +20,16 @@ function ChatDetailCtrl ($scope, $stateParams, $ionicScrollDelegate, $timeout) {
   ///
 
   function sendMessage () {
-    // TODO: Implement this logic
+    if (_.isEmpty($scope.data.message)) {
+      return;
+    }
+
+    $meteor.call('newMessage', {
+      text: $scope.data.message,
+      chatId: chatId
+    });
+
+    delete $scope.data.message;
   }
 
   function inputUp () {

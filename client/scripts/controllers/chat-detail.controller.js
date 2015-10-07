@@ -9,4 +9,13 @@ function ChatDetailCtrl ($scope, $stateParams) {
   $scope.messages = $scope.$meteorCollection(function () {
     return Messages.find({ chatId: chatId });
   }, false);
+
+  $scope.data = {};
+  $scope.sendMessage = sendMessage;
+
+  ///
+
+  function sendMessage () {
+    // TODO: Implement this logic
+  }
 }

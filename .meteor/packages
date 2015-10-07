@@ -19,3 +19,4 @@ insecure                # Allow all DB writes from clients (for prototyping)
 angular@1.2.0-rc.5
 driftyco:ionic
 momentjs:moment
+fourseven:scss

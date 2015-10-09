@@ -2,7 +2,7 @@ angular
   .module('Whatsapp')
   .controller('ProfileCtrl', ProfileCtrl);
 
-function ProfileCtrl ($scope, $state, $meteor, $ionicPopup, $log) {
+function ProfileCtrl ($scope, $state, $meteor, $ionicPopup, $log, $ionicLoading) {
   var user = Meteor.user();
   var name = user && user.profile ? user.profile.name : '';
 
@@ -11,8 +11,31 @@ function ProfileCtrl ($scope, $state, $meteor, $ionicPopup, $log) {
   };
 
   $scope.updateName = updateName;
+  $scope.updatePicture = updatePicture;
 
   ////////////
+
+  function updatePicture () {
+    MeteorCameraUI.getPicture({ width: 60, height: 60 }, function (err, data) {
+      if (err && err.error == 'cancel') {
+        return;
+      }
+
+      if (err) {
+        return handleError(err);
+      }
+
+      $ionicLoading.show({
+        template: 'Updating picture...'
+      });
+
+      $meteor.call('updatePicture', data)
+        .finally(function () {
+          $ionicLoading.hide();
+        })
+        .catch(handleError);
+    });
+  }
 
   function updateName () {
     if (_.isEmpty($scope.data.name)) {

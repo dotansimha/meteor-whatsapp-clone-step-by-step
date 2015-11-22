@@ -59,6 +59,7 @@ function ChatDetailCtrl ($scope, $stateParams, $ionicScrollDelegate, $timeout, $
 
     $meteor.call('newMessage', {
       text: $scope.data.message,
+      type: 'text',
       chatId: chatId
     });
 
